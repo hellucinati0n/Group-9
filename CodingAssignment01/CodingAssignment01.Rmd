@@ -1,6 +1,6 @@
 ---
 title: "Coding Assignment 1"
-author: "Team 9"
+author: "Team Amazing"
 date: "Due: 2024-09-22 23:59"
 output: 
   html_document:
