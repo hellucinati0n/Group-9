@@ -41,6 +41,7 @@ Answer the following questions using complete sentences and attach all output, p
 ```{r dataset, include=FALSE}
 # Bring in the dataset here
 
+claims <- read.csv("Insurance_Data_Group9.csv")
 
 ```
 
