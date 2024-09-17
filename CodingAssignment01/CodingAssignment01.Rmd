@@ -53,7 +53,6 @@ claims <- read.csv("Insurance_Data_Group9.csv")
 ```
 
 
-
 # Question 1
 
 Perform univariate analyses on the quantitative variables (center, shape, spread). Include descriptive statistics, and histograms. Be sure to use terms discussed in class such as bimodal, skewed left, etc.
