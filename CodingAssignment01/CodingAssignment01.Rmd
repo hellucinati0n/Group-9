@@ -111,4 +111,27 @@ An eager insurance representative comes back with a potential client. The client
 
 ```{r q4}
 
+claims <- 4083.36 + 221.94 * 40 - 75.24 * 30 + 1019.22 * 1 
+
+claims
+
+#----------------------------------------------------------------------------------------------------------------
+##this part is the confidence interval calculation
+mean <- 10
+spl <- 100
+sd <- 5620
+se <- 74.96
+ci <- 0.05
+df <- spl - 1
+t.score = qt(ci / 2, df, lower.tail = f)
+moe <- t.score * se
+l.b. <- mean - moe
+u.b <- mean + moe
+
+print(c(l.b,u.b))
+
+x <- seq(-1000, 1000, by = 1)
+y <- dnorm(x,l.b,u.b)
+
+plot(x,y)
 ```
