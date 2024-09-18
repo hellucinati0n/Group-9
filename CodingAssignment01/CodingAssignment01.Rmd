@@ -3,13 +3,16 @@ title: "Coding Assignment 1"
 author: "Team 9"
 date: "Due: 2024-09-22 23:59"
 output:
-  pdf_document:
-    toc: true
-    toc_depth: '2'
   html_document:
     toc: true
     toc_depth: 2
     toc_float: true
+  word_document:
+    toc: true
+    toc_depth: '2'
+  pdf_document:
+    toc: true
+    toc_depth: '2'
 ---
 
 ```{r setup, include=FALSE}
@@ -154,17 +157,15 @@ $$Charges = \beta_{0}+\beta_{1}*Age+\beta_{2}*BMI+\beta_{3}*Children$$
 
 ```{r q3}
 
-model <- lm( Charges ~ Age + BMI + Children, data = InsuranceData)
+model <- lm( Charges ~ Age + BMI + Children, data = claims)
 
-summ(model)
+summary (model)
 
 ```
 
 also write out the regression cleanly in this document.
 
 $$Charges = 4083.36 + 221.94 Age - 75.24 BMI + 1019.22 Children$$
-```{r q4}
-
 # Question 4
 
 An eager insurance representative comes back with a potential client. The client is 40, their BMI is 30, and they have one dependent. Using the regression equation above, predict the amount of medical expenses associated with this policy. (Provide a 95% confidence interval as well)
