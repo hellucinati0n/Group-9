@@ -60,20 +60,12 @@ claims <- read.csv("Insurance_Data_Group9.csv")
 
 Perform univariate analyses on the quantitative variables (center, shape, spread). Include descriptive statistics, and histograms. Be sure to use terms discussed in class such as bimodal, skewed left, etc.
 
-**The data for charges is skewed right.**
+**Seeing as the mean (13494.13) is greater than the median (8964.928), the data for charges is skewed right. The data is multimodal, owing to a plethora of modes found within this data.**
 
 ```{r q1}
 
-hist(Insurance_Data_Group9$Charges)
 mean(Insurance_Data_Group9$Charges)
 median(Insurance_Data_Group9$Charges)
-
-boxplot(Insurance_Data_Group9$Charges)
-var(Insurance_Data_Group9$Charges)
-sd(Insurance_Data_Group9$Charges)
-IQR(Insurance_Data_Group9$Charges)
-range(Insurance_Data_Group9$Charges)
-
 getModes <- function(x) {
   ux <- unique(x)
   tab <- tabulate(match(x, ux))
@@ -81,63 +73,67 @@ getModes <- function(x) {
 }
 getModes(Insurance_Data_Group9$Charges)
 
+hist(Insurance_Data_Group9$Charges)
+boxplot(Insurance_Data_Group9$Charges)
+var(Insurance_Data_Group9$Charges)
+sd(Insurance_Data_Group9$Charges)
+IQR(Insurance_Data_Group9$Charges)
+range(Insurance_Data_Group9$Charges)
+
 ``` 
-**The data for age is asymmetric.**
+**The data for age is slightly asymmetric. A greater mean (39.12) than the median (40.5) indicates a slight skew to the left, even though the mean and median are very close in value. The data set for age is bimodal, and the modes for age when performing an univariate analysis are 39 and 45.**
 ```{r}
-hist(Insurance_Data_Group9$Age)
 mean(Insurance_Data_Group9$Age)
 median(Insurance_Data_Group9$Age)
-
-boxplot(Insurance_Data_Group9$Age)
-var(Insurance_Data_Group9$Age)
-sd(Insurance_Data_Group9$Age)
-IQR(Insurance_Data_Group9$Age)
-range(Insurance_Data_Group9$Age)
-
 getModes <- function(x) {
   ux <- unique(x)
   tab <- tabulate(match(x, ux))
   ux[tab == max(tab)]
 }
 getModes(Insurance_Data_Group9$Age)
+
+hist(Insurance_Data_Group9$Age)
+boxplot(Insurance_Data_Group9$Age)
+var(Insurance_Data_Group9$Age)
+sd(Insurance_Data_Group9$Age)
+IQR(Insurance_Data_Group9$Age)
+range(Insurance_Data_Group9$Age)
 ```
-**The data for BMI is symmetric.**
+**The data for BMI is slightly skewed to the right due to the fact that mean (31.34375) is greater than the median (30.8375); though slightly skewed, the mean and median are nearly equal. The univariate analysis on BMI indicates that the data is multimodal. The modes are as follows: 36.480, 33.345, 27.500, 33.660, 26.410, and 25.840.**
 ```{r}
-hist(Insurance_Data_Group9$BMI)
 mean(Insurance_Data_Group9$BMI)
 median(Insurance_Data_Group9$BMI)
-
-boxplot(Insurance_Data_Group9$BMI)
-var(Insurance_Data_Group9$BMI)
-sd(Insurance_Data_Group9$BMI)
-IQR(Insurance_Data_Group9$BMI)
-range(Insurance_Data_Group9$BMI)
-
 getModes <- function(x) {
   ux <- unique(x)
   tab <- tabulate(match(x, ux))
   ux[tab == max(tab)]
 }
 getModes(Insurance_Data_Group9$BMI)
+
+hist(Insurance_Data_Group9$BMI)
+boxplot(Insurance_Data_Group9$BMI)
+var(Insurance_Data_Group9$BMI)
+sd(Insurance_Data_Group9$BMI)
+IQR(Insurance_Data_Group9$BMI)
+range(Insurance_Data_Group9$BMI)
 ```
-**The data for children is skewed right.**
+**The data for children is skewed right due to the fact that the mean (1.03) is greater than the median (1). However, the mean and median are comparable in quantity. The analysis indicates that there is no mode for children.**
 ```{r}
-hist(Insurance_Data_Group9$Children)
 mean(Insurance_Data_Group9$Children)
 median(Insurance_Data_Group9$Children)
-
-boxplot(Insurance_Data_Group9$Children)
-var(Insurance_Data_Group9$Children)
-sd(Insurance_Data_Group9$Children)
-IQR(Insurance_Data_Group9$Children)
-range(Insurance_Data_Group9$Children)
-
 getModes <- function(x) {
   ux <- unique(x)
   tab <- tabulate(match(x, ux))
   ux[tab == max(tab)]
 }
 getModes(Insurance_Data_Group9$Children)
+
+hist(Insurance_Data_Group9$Children)
+boxplot(Insurance_Data_Group9$Children)
+var(Insurance_Data_Group9$Children)
+sd(Insurance_Data_Group9$Children)
+IQR(Insurance_Data_Group9$Children)
+range(Insurance_Data_Group9$Children)
 ```
 
 
