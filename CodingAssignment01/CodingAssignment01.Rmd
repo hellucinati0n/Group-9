@@ -61,7 +61,7 @@ Answer the following questions using complete sentences and attach all output, p
 ```{r dataset, include=FALSE}
 # Bring in the dataset here
 
-claims <- read.csv("Insurance_Data_Group9.csv")
+Insurance_Data_Group9 <- read.csv("Insurance_Data_Group9.csv")
 
 ```
 
@@ -191,7 +191,7 @@ $$Charges = \beta_{0}+\beta_{1}*Age+\beta_{2}*BMI+\beta_{3}*Children$$
 
 ```{r q3}
 
-model <- lm( Charges ~ Age + BMI + Children, data = claims)
+model <- lm(Charges ~ Age + BMI + Children, data = claims)
 
 summary (model)
 
