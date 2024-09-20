@@ -23,10 +23,20 @@ knitr::opts_chunk$set(echo = TRUE)
 # Put any packages you want here
 
 library(gt)
+library(plotly)
+library(readxl)
+library(corrplot)
+library(ggplot2)
+library(jtools)
+library(sos)
+library(magrittr)
+library(car)
 library(tidyverse)
 library(gtsummary)
-library(plotly)
-library(corrplot)
+library(knitr)
+library(parameters)
+library(broom.helpers)
+
 sessionInfo()
 ```
 
