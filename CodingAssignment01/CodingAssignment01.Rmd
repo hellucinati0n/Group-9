@@ -143,7 +143,35 @@ Perform bivariate analyses on the quantitative variables (direction, strength an
 
 ```{r q2}
 
+reduced <- Insurance_Data_Group9 %>% 
+  select(Charges, Age, BMI, Children)
+
+corrplot(cor(reduced),
+         type = "lower",
+         order = "hclust", 
+         tl.col = "black",
+         tl.srt = 45,
+         addCoef.col = "black",
+         diag = FALSE)
 ```
+
+These are weakly and moderately positively correlated. We might say that BMI has a weak positive relationship with charges, age, and children (correlation is 0.16, 0.17, and 0.12, respectively). A relationship between children and charges is also weakly positive (correlation is 0.19). Age has a moderate positive relationship with charges and children (correlation is 0.26 and 0.34, respectively).
+
+```{r}
+scatterplotMatrix(~ Charges + Age + BMI + Children, data = Insurance_Data_Group9)
+```
+
+Charges vs Age: The plot shows a positive relationship between Charges and Age, with an upward trend. Generally, the scatter plot shows a moderate positive linear relationship between Age and Charges. As Age increases, Charges tend to increase as well, but the relationship is not perfectly linear due to the presence of outliers and high variability in Charges, especially for older individuals. The outliers in this scatter plot weaken the relationship between Age and Charges. 
+
+Charges vs BMI: The scatter plot does not follow a linear pattern. There seems to be some general clustering of points, they are spread across the plot, particularly in the lower half. There are several outliers, particularly towards the top right, where BMI and Charges are both high.
+
+Charges vs Children: The data points are grouped vertically at distinct values for the number of children (0, 1, 2, etc.,).The scatter plot shows neither a linear nor a non-linear association. It may be noticed that slight increases in Charges as Children increase, although the pattern is not strong. At each level of "Children" (0, 1, 2, etc.), the majority of data points cluster in the lower range of charges (below 15,000), but there are some points much higher, reaching up to 50,000. These higher values represent outliers, as they deviate significantly from the rest of the data. These outliers weaken the association between Charges and Children.
+
+Age vs BMI: This scatter plot shows no linear relationship between BMI and Age. The points are spread out relatively evenly across the different age ranges, and no obvious upward or downward trend. The points are widely spread, suggesting that Age and BMI may not be strongly related. While there are a few noticeable outliers, their overall impact on the weak correlation between BMI and Age in this scatter plot is minimal. 
+
+Age vs Children: The scatter plot does not demonstrate a linear association nor non-linear one between the two variables (children and age). The points are scattered without following a consistent upward or downward trend.The outliers in this scatter plot are the data points with a high number of children (4 or 5) at younger ages or those with no children at older ages.
+
+BMI vs Children: No linear or non-linear relationship between BMI and Children is evident. The scatter suggests that these variables are likely unrelated. The values of "Children" (0 to 5) are distributed somewhat uniformly across the BMI range, from 15 to 45. A few points at the far right (BMI between 40 and 45) may be considered outliers. The points where the number of children is 4 or 5 are also outliers.
 
 # Question 3
 
