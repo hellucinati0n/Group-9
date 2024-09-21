@@ -191,15 +191,15 @@ $$Charges = \beta_{0}+\beta_{1}*Age+\beta_{2}*BMI+\beta_{3}*Children$$
 
 ```{r q3}
 
-model <- lm(Charges ~ Age + BMI + Children, data = claims)
+model <- lm( Charges ~ Age + BMI + Children, data = Insurance_Data_Group9)
 
-summary (model)
+summ(model)
 
 ```
 
 also write out the regression cleanly in this document.
 
-$$Charges = 4083.36 + 221.94 Age - 75.24 BMI + 1019.22 Children$$
+$$Charges = -3055.73 + 199.54 Age + 242.86 BMI + 1098.55 Children$$
 # Question 4
 
 An eager insurance representative comes back with a potential client. The client is 40, their BMI is 30, and they have one dependent. Using the regression equation above, predict the amount of medical expenses associated with this policy. (Provide a 95% confidence interval as well)
