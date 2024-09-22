@@ -70,7 +70,6 @@ Insurance_Data_Group9 <- read.csv("Insurance_Data_Group9.csv")
 
 Perform univariate analyses on the quantitative variables (center, shape, spread). Include descriptive statistics, and histograms. Be sure to use terms discussed in class such as bimodal, skewed left, etc.
 
-**Seeing as the mean (13494.13) is greater than the median (8964.928), the data for charges is skewed right. The data is multimodal, owing to a plethora of modes found within this data.**
 
 ```{r q1.1}
 
@@ -91,7 +90,10 @@ IQR(Insurance_Data_Group9$Charges)
 range(Insurance_Data_Group9$Charges)
 
 ``` 
-The data for age is slightly asymmetric. A greater mean (39.12) than the median (40.5) indicates a slight skew to the left, even though the mean and median are very close in value. The data set for age is bimodal, and the modes for age when performing an univariate analysis are 39 and 45.
+
+
+**Considering the mean (13494.13) is greater than the median (8964.928), the data for charges is skewed right. The data is multimodal, owing to a plethora of modes found within this data.**
+
 
 ```{r q1.2}
 
@@ -111,7 +113,10 @@ sd(Insurance_Data_Group9$Age)
 IQR(Insurance_Data_Group9$Age)
 range(Insurance_Data_Group9$Age)
 ```
-The data for BMI is slightly skewed to the right due to the fact that mean (31.34375) is greater than the median (30.8375); though slightly skewed, the mean and median are nearly equal. The univariate analysis on BMI indicates that the data is multimodal. The modes are as follows: 36.480, 33.345, 27.500, 33.660, 26.410, and 25.840.
+
+
+**The data for age is slightly asymmetric. A greater mean (39.12) than the median (40.5) indicates a slight skew to the left, even though the mean and median are very close in value. The data set for age is bimodal, and the modes for age when performing an univariate analysis are 39 and 45.**
+
 
 ```{r q1.3}
 mean(Insurance_Data_Group9$BMI)
@@ -130,7 +135,10 @@ sd(Insurance_Data_Group9$BMI)
 IQR(Insurance_Data_Group9$BMI)
 range(Insurance_Data_Group9$BMI)
 ```
-The data for children is skewed right due to the fact that the mean (1.03) is greater than the median (1). However, the mean and median are comparable in quantity. The analysis indicates that there is no mode for children.
+
+
+**The data for BMI is slightly skewed to the right due to the fact that mean (31.34375) is greater than the median (30.8375); though slightly skewed, the mean and median are nearly equal. The univariate analysis on BMI indicates that the data is multimodal. The modes are as follows: 36.480, 33.345, 27.500, 33.660, 26.410, and 25.840.**
+
 
 ```{r q1.4}
 mean(Insurance_Data_Group9$Children)
@@ -151,6 +159,9 @@ range(Insurance_Data_Group9$Children)
 ```
 
 
+**The data for children is skewed right due to the fact that the mean (1.03) is greater than the median (1). However, the mean and median are comparable in quantity. The analysis indicates that there is no mode for children.**
+
+
 # Question 2
 
 Perform bivariate analyses on the quantitative variables (direction, strength and form). Describe the linear association between all variables. 
@@ -169,24 +180,33 @@ corrplot(cor(reduced),
          diag = FALSE)
 ```
 
-These are weakly and moderately positively correlated. We might say that BMI has a weak positive relationship with charges, age, and children (correlation is 0.16, 0.17, and 0.12, respectively). A relationship between children and charges is also weakly positive (correlation is 0.19). Age has a moderate positive relationship with charges and children (correlation is 0.26 and 0.34, respectively).
+
+**These are weakly and moderately positively correlated. We might say that BMI has a weak positive relationship with charges, age, and children (correlation is 0.16, 0.17, and 0.12, respectively). A relationship between children and charges is also weakly positive (correlation is 0.19). Age has a moderate positive relationship with charges and children (correlation is 0.26 and 0.34, respectively).**
+
 
 ```{r q2.2}
 
 scatterplotMatrix(~ Charges + Age + BMI + Children, data = Insurance_Data_Group9)
 ```
 
-Charges vs Age: The plot shows a positive relationship between Charges and Age, with an upward trend. Generally, the scatter plot shows a moderate positive linear relationship between Age and Charges. As Age increases, Charges tend to increase as well, but the relationship is not perfectly linear due to the presence of outliers and high variability in Charges, especially for older individuals. The outliers in this scatter plot weaken the relationship between Age and Charges. 
 
-Charges vs BMI: The scatter plot does not follow a linear pattern. There seems to be some general clustering of points, they are spread across the plot, particularly in the lower half. There are several outliers, particularly towards the top right, where BMI and Charges are both high.
+**Charges vs Age:** The plot shows a positive relationship between Charges and Age, with an upward trend. Generally, the scatter plot shows a moderate positive linear relationship between Age and Charges. As Age increases, Charges tend to increase as well, but the relationship is not perfectly linear due to the presence of outliers and high variability in Charges, especially for older individuals. The outliers in this scatter plot weaken the relationship between Age and Charges. 
 
-Charges vs Children: The data points are grouped vertically at distinct values for the number of children (0, 1, 2, etc.,).The scatter plot shows neither a linear nor a non-linear association. It may be noticed that slight increases in Charges as Children increase, although the pattern is not strong. At each level of "Children" (0, 1, 2, etc.), the majority of data points cluster in the lower range of charges (below 15,000), but there are some points much higher, reaching up to 50,000. These higher values represent outliers, as they deviate significantly from the rest of the data. These outliers weaken the association between Charges and Children.
 
-Age vs BMI: This scatter plot shows no linear relationship between BMI and Age. The points are spread out relatively evenly across the different age ranges, and no obvious upward or downward trend. The points are widely spread, suggesting that Age and BMI may not be strongly related. While there are a few noticeable outliers, their overall impact on the weak correlation between BMI and Age in this scatter plot is minimal. 
+**Charges vs BMI:** The scatter plot does not follow a linear pattern. There seems to be some general clustering of points, they are spread across the plot, particularly in the lower half. There are several outliers, particularly towards the top right, where BMI and Charges are both high.
 
-Age vs Children: The scatter plot does not demonstrate a linear association nor non-linear one between the two variables (children and age). The points are scattered without following a consistent upward or downward trend.The outliers in this scatter plot are the data points with a high number of children (4 or 5) at younger ages or those with no children at older ages.
 
-BMI vs Children: No linear or non-linear relationship between BMI and Children is evident. The scatter suggests that these variables are likely unrelated. The values of "Children" (0 to 5) are distributed somewhat uniformly across the BMI range, from 15 to 45. A few points at the far right (BMI between 40 and 45) may be considered outliers. The points where the number of children is 4 or 5 are also outliers.
+**Charges vs Children:** The data points are grouped vertically at distinct values for the number of children (0, 1, 2, etc.,).The scatter plot shows neither a linear nor a non-linear association. It may be noticed that slight increases in Charges as Children increase, although the pattern is not strong. At each level of "Children" (0, 1, 2, etc.), the majority of data points cluster in the lower range of charges (below 15,000), but there are some points much higher, reaching up to 50,000. These higher values represent outliers, as they deviate significantly from the rest of the data. These outliers weaken the association between Charges and Children.
+
+
+**Age vs BMI:** This scatter plot shows no linear relationship between BMI and Age. The points are spread out relatively evenly across the different age ranges, and no obvious upward or downward trend. The points are widely spread, suggesting that Age and BMI may not be strongly related. While there are a few noticeable outliers, their overall impact on the weak correlation between BMI and Age in this scatter plot is minimal.
+
+
+**Age vs Children:** The scatter plot does not demonstrate a linear association nor non-linear one between the two variables (children and age). The points are scattered without following a consistent upward or downward trend.The outliers in this scatter plot are the data points with a high number of children (4 or 5) at younger ages or those with no children at older ages.
+
+
+**BMI vs Children:** No linear or non-linear relationship between BMI and Children is evident. The scatter suggests that these variables are likely unrelated. The values of "Children" (0 to 5) are distributed somewhat uniformly across the BMI range, from 15 to 45. A few points at the far right (BMI between 40 and 45) may be considered outliers. The points where the number of children is 4 or 5 are also outliers.
+
 
 # Question 3
 
@@ -201,7 +221,9 @@ model <- lm( Charges ~ Age + BMI + Children, data = Insurance_Data_Group9)
 summ(model)
 
 ```
-By generating a linear model of the imported data, we can obtain and evaluate the data in terms of a multiple regression formula. The output gives us the intercept in addition to coefficients for age, BMI, and children.
+
+
+**By generating a linear model of the imported data, we can obtain and evaluate the data in terms of a multiple regression formula. The output gives us the intercept in addition to coefficients for age, BMI, and children.**
 
 also write out the regression cleanly in this document.
 
@@ -226,4 +248,5 @@ newdata = newPrediction,
 interval = "confidence",
 level = .95)
 ```
-Using the model from question 3, we can create a new prediction that factors in the given metrics for age, BMI, and children. As such, the new prediction yields a result. The resulting charges given the above data would be $13,310.43.
+
+**Using the model from question 3, we can create a new prediction that factors in the given metrics for age, BMI, and children. As such, the new prediction yields a result. The resulting charges given the above data would be $13,310.43.**
