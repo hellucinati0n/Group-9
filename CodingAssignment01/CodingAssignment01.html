@@ -1504,6 +1504,8 @@ library(plotly)</code></pre>
 <pre class="r"><code>library(readxl)
 library(corrplot)</code></pre>
 <pre><code>## corrplot 0.94 loaded</code></pre>
+<pre class="r"><code>library(car)</code></pre>
+<pre><code>## Loading required package: carData</code></pre>
 <pre class="r"><code>library(ggplot2)
 library(jtools)
 library(sos)</code></pre>
@@ -1517,9 +1519,7 @@ library(sos)</code></pre>
 ## 
 ##     ?</code></pre>
 <pre class="r"><code>library(magrittr)
-library(car)</code></pre>
-<pre><code>## Loading required package: carData</code></pre>
-<pre class="r"><code>library(tidyverse)</code></pre>
+library(tidyverse)</code></pre>
 <pre><code>## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
 ## ✔ dplyr     1.1.4     ✔ readr     2.1.5
 ## ✔ forcats   1.0.0     ✔ stringr   1.5.1
@@ -1578,33 +1578,33 @@ library(broom.helpers)</code></pre>
 ##  [4] gtsummary_2.0.2      lubridate_1.9.3      forcats_1.0.0       
 ##  [7] stringr_1.5.1        dplyr_1.1.4          purrr_1.0.2         
 ## [10] readr_2.1.5          tidyr_1.3.1          tibble_3.2.1        
-## [13] tidyverse_2.0.0      car_3.1-2            carData_3.0-5       
-## [16] magrittr_2.0.3       sos_2.1-8            brew_1.0-10         
-## [19] jtools_2.3.0         corrplot_0.94        readxl_1.4.3        
+## [13] tidyverse_2.0.0      magrittr_2.0.3       sos_2.1-8           
+## [16] brew_1.0-10          jtools_2.3.0         car_3.1-2           
+## [19] carData_3.0-5        corrplot_0.94        readxl_1.4.3        
 ## [22] plotly_4.10.4        ggplot2_3.5.1        gt_0.11.0           
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] tidyselect_1.2.1    viridisLite_0.4.2   fastmap_1.2.0      
-##  [4] lazyeval_0.2.2      bayestestR_0.14.0   digest_0.6.37      
-##  [7] timechange_0.3.0    lifecycle_1.0.4     compiler_4.4.1     
-## [10] rlang_1.1.4         sass_0.4.9          tools_4.4.1        
-## [13] utf8_1.2.4          yaml_2.3.10         data.table_1.16.0  
-## [16] htmlwidgets_1.6.4   xml2_1.3.6          abind_1.4-5        
-## [19] withr_3.0.1         grid_4.4.1          datawizard_0.12.3  
-## [22] fansi_1.0.6         colorspace_2.1-1    future_1.34.0      
-## [25] globals_0.16.3      scales_1.3.0        insight_0.20.4     
-## [28] cli_3.6.3           rmarkdown_2.28      generics_0.1.3     
-## [31] rstudioapi_0.16.0   httr_1.4.7          tzdb_0.4.0         
-## [34] cachem_1.1.0        pander_0.6.5        splines_4.4.1      
-## [37] parallel_4.4.1      cellranger_1.1.0    vctrs_0.6.5        
-## [40] jsonlite_1.8.8      hms_1.1.3           listenv_0.9.1      
-## [43] jquerylib_0.1.4     glue_1.7.0          parallelly_1.38.0  
-## [46] codetools_0.2-20    stringi_1.8.4       gtable_0.3.5       
-## [49] broom.mixed_0.2.9.5 munsell_0.5.1       furrr_0.3.1        
-## [52] pillar_1.9.0        htmltools_0.5.8.1   R6_2.5.1           
-## [55] evaluate_0.24.0     lattice_0.22-6      backports_1.5.0    
-## [58] broom_1.0.6         bslib_0.8.0         Rcpp_1.0.13        
-## [61] nlme_3.1-166        xfun_0.47           pkgconfig_2.0.3</code></pre>
+##  [1] gtable_0.3.5        bayestestR_0.14.0   xfun_0.47          
+##  [4] bslib_0.8.0         htmlwidgets_1.6.4   insight_0.20.4     
+##  [7] lattice_0.22-6      tzdb_0.4.0          vctrs_0.6.5        
+## [10] tools_4.4.1         generics_0.1.3      datawizard_0.12.3  
+## [13] parallel_4.4.1      fansi_1.0.6         pkgconfig_2.0.3    
+## [16] data.table_1.16.0   lifecycle_1.0.4     compiler_4.4.1     
+## [19] munsell_0.5.1       codetools_0.2-20    htmltools_0.5.8.1  
+## [22] sass_0.4.9          yaml_2.3.10         lazyeval_0.2.2     
+## [25] pillar_1.9.0        furrr_0.3.1         jquerylib_0.1.4    
+## [28] broom.mixed_0.2.9.5 cachem_1.1.0        abind_1.4-5        
+## [31] nlme_3.1-166        parallelly_1.38.0   tidyselect_1.2.1   
+## [34] digest_0.6.37       stringi_1.8.4       future_1.34.0      
+## [37] pander_0.6.5        listenv_0.9.1       splines_4.4.1      
+## [40] fastmap_1.2.0       grid_4.4.1          colorspace_2.1-1   
+## [43] cli_3.6.3           utf8_1.2.4          broom_1.0.6        
+## [46] withr_3.0.1         scales_1.3.0        backports_1.5.0    
+## [49] timechange_0.3.0    rmarkdown_2.28      httr_1.4.7         
+## [52] globals_0.16.3      cellranger_1.1.0    hms_1.1.3          
+## [55] evaluate_0.24.0     viridisLite_0.4.2   rlang_1.1.4        
+## [58] Rcpp_1.0.13         glue_1.7.0          xml2_1.3.6         
+## [61] rstudioapi_0.16.0   jsonlite_1.8.8      R6_2.5.1</code></pre>
 <p>A Florida health insurance company wants to predict annual claims for
 individual clients. The company pulls a random sample of 100 customers.
 The owner wishes to charge an actuarially fair premium to ensure a
@@ -1675,11 +1675,11 @@ getModes(Insurance_Data_Group9$Charges)</code></pre>
 <pre><code>## [1] 11867.89</code></pre>
 <pre class="r"><code>range(Insurance_Data_Group9$Charges)</code></pre>
 <pre><code>## [1]  1136.399 51194.559</code></pre>
-<p><strong>The data for age is slightly asymmetric. A greater mean
-(39.12) than the median (40.5) indicates a slight skew to the left, even
-though the mean and median are very close in value. The data set for age
-is bimodal, and the modes for age when performing an univariate analysis
-are 39 and 45.</strong></p>
+<p>The data for age is slightly asymmetric. A greater mean (39.12) than
+the median (40.5) indicates a slight skew to the left, even though the
+mean and median are very close in value. The data set for age is
+bimodal, and the modes for age when performing an univariate analysis
+are 39 and 45.</p>
 <pre class="r"><code>mean(Insurance_Data_Group9$Age)</code></pre>
 <pre><code>## [1] 39.12</code></pre>
 <pre class="r"><code>median(Insurance_Data_Group9$Age)</code></pre>
@@ -1703,12 +1703,11 @@ getModes(Insurance_Data_Group9$Age)</code></pre>
 <pre><code>## [1] 21.25</code></pre>
 <pre class="r"><code>range(Insurance_Data_Group9$Age)</code></pre>
 <pre><code>## [1] 18 64</code></pre>
-<p><strong>The data for BMI is slightly skewed to the right due to the
-fact that mean (31.34375) is greater than the median (30.8375); though
-slightly skewed, the mean and median are nearly equal. The univariate
-analysis on BMI indicates that the data is multimodal. The modes are as
-follows: 36.480, 33.345, 27.500, 33.660, 26.410, and
-25.840.</strong></p>
+<p>The data for BMI is slightly skewed to the right due to the fact that
+mean (31.34375) is greater than the median (30.8375); though slightly
+skewed, the mean and median are nearly equal. The univariate analysis on
+BMI indicates that the data is multimodal. The modes are as follows:
+36.480, 33.345, 27.500, 33.660, 26.410, and 25.840.</p>
 <pre class="r"><code>mean(Insurance_Data_Group9$BMI)</code></pre>
 <pre><code>## [1] 31.34375</code></pre>
 <pre class="r"><code>median(Insurance_Data_Group9$BMI)</code></pre>
@@ -1732,10 +1731,10 @@ getModes(Insurance_Data_Group9$BMI)</code></pre>
 <pre><code>## [1] 8.235</code></pre>
 <pre class="r"><code>range(Insurance_Data_Group9$BMI)</code></pre>
 <pre><code>## [1] 15.96 48.07</code></pre>
-<p><strong>The data for children is skewed right due to the fact that
-the mean (1.03) is greater than the median (1). However, the mean and
-median are comparable in quantity. The analysis indicates that there is
-no mode for children.</strong></p>
+<p>The data for children is skewed right due to the fact that the mean
+(1.03) is greater than the median (1). However, the mean and median are
+comparable in quantity. The analysis indicates that there is no mode for
+children.</p>
 <pre class="r"><code>mean(Insurance_Data_Group9$Children)</code></pre>
 <pre><code>## [1] 1.03</code></pre>
 <pre class="r"><code>median(Insurance_Data_Group9$Children)</code></pre>
@@ -1859,7 +1858,10 @@ gives us the intercept in addition to coefficients for age, BMI, and
 children.</p>
 <p>also write out the regression cleanly in this document.</p>
 <p><span class="math display">\[Charges = -3055.73 + 199.54 Age + 242.86
-BMI + 1098.55 Children\]</span> # Question 4</p>
+BMI + 1098.55 Children\]</span></p>
+</div>
+<div id="question-4" class="section level1">
+<h1>Question 4</h1>
 <p>An eager insurance representative comes back with a potential client.
 The client is 40, their BMI is 30, and they have one dependent. Using
 the regression equation above, predict the amount of medical expenses
