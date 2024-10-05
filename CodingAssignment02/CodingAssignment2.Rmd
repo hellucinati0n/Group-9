@@ -1,6 +1,6 @@
 ---
 title: "Coding Assignment 2"
-author: "Team N"
+author: "Team 9"
 date: "Due: 2024-10-13 23:59"
 output: 
   html_document:
@@ -29,7 +29,7 @@ Answer the following questions using complete sentences and attach all output, p
 
 
 ```{r dataset, include=FALSE}
-insurance <- read.csv("../Data/Insurance.csv")
+insurance <- read.csv("../CodingAssignment02/Insurance_Data_Group9.csv")
 ```
 
 
