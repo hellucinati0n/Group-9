@@ -10,6 +10,23 @@ output:
 
 ```{r setup, include=FALSE}
 #Put any packages you need here
+
+library(gt)
+library(plotly)
+library(readxl)
+library(corrplot)
+library(car)
+library(ggplot2)
+library(jtools)
+library(sos)
+library(magrittr)
+library(tidyverse)
+library(gtsummary)
+library(knitr)
+library(parameters)
+library(broom.helpers)
+
+sessionInfo()
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
@@ -41,6 +58,9 @@ $$Charges = \beta_{0}+\beta_{1}*Age+\beta_{2}*BMI+\beta_{3}*Children + \beta_{4}
 
 ```{r q1}
 
+model_full <- lm(Charges ~., data = Insurance_Data_Group9)
+summary(model_full)
+regsummary(model_full)
 ```
 
 Which independent variables test significant in a two-tailed test? Use $\alpha = 0.2$
@@ -74,6 +94,12 @@ Using the regression equation above, predict the amount of medical expenses asso
 Compare the model from question 1, to a model that does not include the group of city dummies. Does including the cities reduce the SSE by a statistically significant amount? (check the partial F-test for significance of the dummies as a group). Use $\alpha = 0.05$
 
 ```{r q4}
+
+reduced_insurance <- insurance[,-(7:9)] # drops columns 7 through 9
+model_reduced <- lm(Charges ~. , data = reduced_insurance) 
+summary(model_reduced)
+
+anova(model_reduced, model_full)
 
 ```
 
