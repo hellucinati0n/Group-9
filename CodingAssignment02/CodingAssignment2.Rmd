@@ -65,12 +65,14 @@ regsummary(model_full)
 
 Which independent variables test significant in a two-tailed test? Use $\alpha = 0.2$
 
+Age, BMI, Children, Smoker, and WinterPark all tested significant.
 
 
 ## Question 2
 
 Interpret the coefficients of all the independent variables that tested significant.
 
+For each year of age, there is an estimated additional 251.26 in charges. The margin of error for the age estimation is +/- 59. For each additional point of BMI, there is an estimated additional 394.14 in charges. The margin of error the BMI estimation is +/- 130. For each additional Child covered by the insurance plan there is an estimated additional 1075.41 in charges. The margin of error for the Child estimation is +/- 695. If the primary beneficiary is a smoker there an estimated additional charge of 24707.50. The margin of error for the smoker estimation is +/- 1747. If the city is Winter Park, there is an expected reduction of charges to the tune of -3937.16. The margin of error for the Winter Park estimation is +/- 2052.
 
 ## Question 3
 
