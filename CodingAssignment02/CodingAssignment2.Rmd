@@ -64,7 +64,7 @@ $$Charges = \beta_{0}+\beta_{1}*Age+\beta_{2}*BMI+\beta_{3}*Children + \beta_{4}
 ```{r q1}
 
 # Regression equation
-model <- lm(Charges ~ Age + BMI + Children + Female + Smoker + WinterSprings + WinterPark + Oviedo, data = insurance)
+model <- lm(Charges ~ Age + BMI + Children + Female + Smoker + WinterSprings + WinterPark + Oviedo - 1, data = insurance)
 
 # Display the summary of the model
 regsummary <- summary(model)
@@ -83,10 +83,6 @@ sigvar <- names(p_values[p_values <= alpha])
 
 # Print significant variables
 print(sigvar)
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
 ```
 
 Which independent variables test significant in a two-tailed test? Use $\alpha = 0.2$
