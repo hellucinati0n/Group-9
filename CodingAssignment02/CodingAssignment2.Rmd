@@ -147,6 +147,14 @@ print(prediction)
 
 
 ```
+This is a summary of the regression model that includes coefficients showing how much each factor contributes to predicting medical expenses.
+
+The predicted value for this client is $5,575 with a 95% confidence interval of [$2,606.52,$8,544.95]. 
+
+Fit= Charges 
+lwr= lower bound
+upr= upper bound
+
 
 ## Question 4
 
