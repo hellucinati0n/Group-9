@@ -46,6 +46,7 @@ Answer the following questions using complete sentences and attach all output, p
 
 
 ```{r dataset, include=FALSE}
+
 insurance <- read.csv("../CodingAssignment02/Insurance_Data_Group9.csv")
 ```
 
@@ -58,9 +59,27 @@ $$Charges = \beta_{0}+\beta_{1}*Age+\beta_{2}*BMI+\beta_{3}*Children + \beta_{4}
 
 ```{r q1}
 
-model_full <- lm(Charges ~., data = Insurance_Data_Group9)
-summary(model_full)
-regsummary(model_full)
+# Regression equation
+model <- lm(Charges ~ Age + BMI + Children + Female + Smoker + WinterSprings + WinterPark + Oviedo, data = insurance)
+
+# Display the summary of the model
+regsummary <- summary(model)
+regsummary
+#summ(model)
+
+# Get info for coefficients and p-values
+coefficients <- regsummary$coefficients
+
+# Grab p-values from the 4th column
+p_values <- coefficients[, 4] 
+
+# Find significant variables at alpha = 0.2
+alpha <- 0.2
+sigvar <- names(p_values[p_values <= alpha])
+
+# Print significant variables
+print(sigvar)
+
 ```
 
 Which independent variables test significant in a two-tailed test? Use $\alpha = 0.2$
@@ -99,7 +118,7 @@ reduced_insurance <- insurance[,-(7:9)] # drops columns 7 through 9
 model_reduced <- lm(Charges ~. , data = reduced_insurance) 
 summary(model_reduced)
 
-anova(model_reduced, model_full)
+anova(model_reduced, model)
 
 ```
 
