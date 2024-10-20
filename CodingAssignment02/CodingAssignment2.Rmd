@@ -13,26 +13,11 @@ output:
 ```{r setup, include=FALSE}
 #Put any packages you need here
 
-library(gt)
-library(plotly)
 library(readxl)
-library(corrplot)
-library(car)
-library(ggplot2)
-library(jtools)
-library(sos)
-library(magrittr)
-library(tidyverse)
-library(gtsummary)
-library(knitr)
-library(parameters)
-library(broom.helpers)
 
 sessionInfo()
 knitr::opts_chunk$set(echo = TRUE)
 
-library(dplyr)
-library(jtools)
 
 ```
 
@@ -66,7 +51,7 @@ $$Charges = \beta_{0}+\beta_{1}*Age+\beta_{2}*BMI+\beta_{3}*Children + \beta_{4}
 ```{r q1}
 
 # Regression equation
-model <- lm(Charges ~ Age + BMI + Children + Female + Smoker + WinterSprings + WinterPark + Oviedo - 1, data = insurance)
+model <- lm(Charges ~ Age + BMI + Children + Female + Smoker + WinterSprings + WinterPark + Oviedo, data = insurance)
 
 # Display the summary of the model
 regsummary <- summary(model)
@@ -89,7 +74,7 @@ print(sigvar)
 
 Which independent variables test significant in a two-tailed test? Use $\alpha = 0.2$
 
-Age, BMI, Children, Smoker, and WinterPark all tested significant.
+Age, BMI, Children, Smoker, and WinterPark all tested significant because p < alpha.
 
 
 ## Question 2
