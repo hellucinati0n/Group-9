@@ -148,11 +148,13 @@ Compare the model from question 1, to a model that does not include the group of
 
 ```{r q4}
 
-reduced_insurance <- insurance[,-(7:9)] # drops columns 7 through 9
-model_reduced <- lm(Charges ~. , data = reduced_insurance) 
-summary(model_reduced)
+reduced_insurance <- insurance[,-(7:9)] # drops columns 7 through 9 from original insurance data, eliminating city dummy variables
 
-anova(model_reduced, model)
+model_reduced <- lm(Charges ~. , data = reduced_insurance) #creates linear model of data based on reduced insurance model
+
+summary(model_reduced) #creates summary of reduced insurance model
+
+anova(model_reduced, model) #creates comparison of reduced model versus original model including all data
 
 ```
 
