@@ -1563,12 +1563,7 @@ sigvar &lt;- sigvar[sigvar != &quot;(Intercept)&quot;]
 
 # Print significant variables
 print(sigvar)</code></pre>
-<<<<<<< HEAD
 <pre><code>## [1] &quot;Age&quot;        &quot;BMI&quot;        &quot;Children&quot;   &quot;Smoker&quot;     &quot;WinterPark&quot;</code></pre>
-=======
-<pre><code>## [1] &quot;(Intercept)&quot; &quot;Age&quot;         &quot;BMI&quot;         &quot;Children&quot;    &quot;Smoker&quot;     
-## [6] &quot;WinterPark&quot;</code></pre>
->>>>>>> 05d07f541a920848c90282710ef7e3266df9bd70
 <p>Which independent variables test significant in a two-tailed test?
 Use <span class="math inline">\(\alpha = 0.2\)</span></p>
 <p>Age, BMI, Children, Smoker, and WinterPark all tested significant
@@ -1710,6 +1705,8 @@ summary(model_reduced) #creates summary of reduced insurance model</code></pre>
 ## 2     91 2855516932  3 235908284 2.506 0.06398 .
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>At alpha .05, the BMI, Children, and smoker categories test
+significant.</p>
 </div>
 
 
