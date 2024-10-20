@@ -157,5 +157,5 @@ summary(model_reduced) #creates summary of reduced insurance model
 anova(model_reduced, model) #creates comparison of reduced model versus original model including all data
 
 ```
-
+At alpha .05, the BMI, Children, and smoker categories test significant.
 
