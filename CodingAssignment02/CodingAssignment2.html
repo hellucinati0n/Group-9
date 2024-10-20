@@ -1552,20 +1552,22 @@ regsummary</code></pre>
 coefficients &lt;- regsummary$coefficients
 
 # Grab p-values from the 4th column
-p_values &lt;- coefficients[, 4] 
+p_values &lt;- coefficients[, 4]
 
 # Find significant variables at alpha = 0.2
 alpha &lt;- 0.2
 sigvar &lt;- names(p_values[p_values &lt;= alpha])
 
+#Remove Intercept from significant variables
+sigvar &lt;- sigvar[sigvar != &quot;(Intercept)&quot;]
+
 # Print significant variables
 print(sigvar)</code></pre>
-<pre><code>## [1] &quot;(Intercept)&quot; &quot;Age&quot;         &quot;BMI&quot;         &quot;Children&quot;    &quot;Smoker&quot;     
-## [6] &quot;WinterPark&quot;</code></pre>
+<pre><code>## [1] &quot;Age&quot;        &quot;BMI&quot;        &quot;Children&quot;   &quot;Smoker&quot;     &quot;WinterPark&quot;</code></pre>
 <p>Which independent variables test significant in a two-tailed test?
 Use <span class="math inline">\(\alpha = 0.2\)</span></p>
-<p>Age, Children, Smoker, and WinterPark all tested significant because
-p &lt; alpha.</p>
+<p>Age, BMI, Children, Smoker, and WinterPark all tested significant
+because p &lt; alpha.</p>
 </div>
 <div id="question-2" class="section level2">
 <h2>Question 2</h2>
