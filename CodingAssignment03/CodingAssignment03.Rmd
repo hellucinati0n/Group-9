@@ -10,12 +10,17 @@ output:
 
 ```{r setup, include=FALSE}
 #Put any packages you need here
+
 knitr::opts_chunk$set(echo = TRUE)
-library(dplyr)
+library(dplyr) # for pipe operator
 library(jtools)
-library(readxl)
-library(gtsummary)
-```
+library(gtsummary) # for better summary statistics
+library(gt) # for better looking tables
+library(tidyverse)
+library(plotly) # for interactive visualtizations
+library(corrplot)
+library(car) # for vif function
+#
 ```
 
 A Florida health insurance company wants to predict annual claims for individual clients. The company pulls a random sample of 100 customers. The owner wishes to charge an actuarially fair premium to ensure a normal rate of return. The owner collects all of their current customer’s health care expenses from the last year and compares them with what is known about each customer’s plan. 
@@ -34,11 +39,9 @@ Answer the following questions using complete sentences and attach all output, p
 
 
 ```{r dataset}
-# Bring in the dataset here.
 insurance <- read.csv("../CodingAssignment03/Insurance_Data_Group9.csv")
 
 ```
-
 
 
 ## Question 1
@@ -61,7 +64,6 @@ train %>%
                                ),
     type = all_continuous() ~ "continuous2" # Enhanced formatting for continuous variables
   )
-#
 ```
 
 
@@ -69,10 +71,10 @@ train %>%
 
 Provide the correlation between all quantitative variables
 
+
 ```{r}
 cor(train[, c("Charges", "Age", "BMI", "Children")])
 
-#
 ```
 
 
@@ -87,12 +89,163 @@ plot(allvar)
 
 ```
 
+Transforming Charges into the log function enables us to reduce heteroskedasticity and bring points closer to each other. After transforming charges into the log function, the histogram indicates that the log of charges has a normal distribution. Therefore, log of charges is a better representation of this variable.  
+
 
 ## Question 4
 
 Implement the solutions from question 3, such as data transformation, along with any other changes you wish. Use the sample data and run a new regression. How have the fit measures changed? How have the signs and significance of the coefficients changed?
 
 ```{r q4}
+
+hist(train$Charges) #before
+train$lnCharges <- log(train$Charges) 
+hist(train$lnCharges) #after
+
+hist(train$Charges) #before
+train$ChargesSquared <- train$Charges^2 
+hist(train$ChargesSquared) #after
+```
+
+```{r}
+scatterplotMatrix(train[c(10,2:3,5)]) # grabbing ln charges
+par(mfrow=c(1,2)) # Lipton Input to place the charts side by side
+```
+
+```{r}
+train$ChildrenSquared <- train$Children^2
+hist(train$ChildrenSquared) #after
+
+train$lnChildren <- log(train$Children) 
+hist(train$lnChildren) #after
+
+scatterplotMatrix(train[c(10,2:3,12)]) # grabbing lnCharges with lnChildren
+par(mfrow=c(1,2)) #  Input to place the charts side by side
+```
+
+```{r}
+hist(train$Age) #before
+train$AgeSquared <- train$Age^2 
+hist(train$AgeSquared) #after
+```
+
+```{r}
+hist(train$Age) #before
+train$lnAge <- log(train$Age) 
+hist(train$lnAge) #after
+```
+
+```{r}
+hist(train$BMI) #before
+train$BMISquared <- train$BMI^2 
+hist(train$BMISquared) #after
+```
+
+```{r}
+hist(train$BMI) #before
+train$lnBMI <- log(train$BMI) 
+hist(train$lnBMI) #after
+```
+
+Transforming the Children variable into the log and quadratic form does not change the variable in to a normal distribution. Therefore, the Children variable does not fit the log and quadratic form.
+
+```{r}
+
+#Model 1
+
+model_1 <- lm(lnCharges ~., data = train[,c(10,2:9)] )
+summary(model_1)
+
+#this model only change is log of charges, all independent variables remain the same.
+
+```
+
+```{r}
+par(mfrow=c(2,2))
+plot(model_1)
+```
+
+```{r}
+#Model 2
+model_2 <- lm(lnCharges ~., data = train[,c(10,3:9,15)] ) #pulling only columns I want
+summary(model_2)
+#this model uses lncharges and lnAge
+```
+
+```{r}
+par(mfrow=c(2,2))
+plot(model_2)
+```
+
+```{r}
+# Model 3
+model_3 <- lm(lnCharges ~., data = train[,c(10,14,3:9)] ) #pulling only columns I want
+summary(model_3)
+#this model uses lncharges and AgeSquared
+```
+
+```{r}
+par(mfrow=c(2,2)) #residuals vs fitted
+plot(model_3) #q-q residuals
+```
+
+```{r}
+#Model 4
+model_4 <- lm(lnCharges ~., data = train[,c(10,2,4:9,17)] ) #pulling only columns I want
+summary(model_4)
+#this model uses lncharges and lnBMI
+```
+
+```{r}
+par(mfrow=c(2,2)) #residuals vs fitted
+plot(model_4) #Q-Q Residuals
+```
+
+```{r}
+#Model 5
+model_5 <- lm(lnCharges ~., data = train[,c(10,2,4:9,16)] ) #pulling only columns I want
+summary(model_5)
+#this model uses lncharges and BMISquared
+```
+
+```{r}
+par(mfrow=c(2,2))
+plot(model_5)
+```
+
+```{r}
+#Model 6
+model_6 <- lm(lnCharges ~., data = train[,c(10,2:4,6:9,12,5)] ) #pulling only columns I want
+summary(model_6)
+#this model uses lncharges and ChildrenSquared
+```
+
+```{r}
+par(mfrow=c(2,2))
+plot(model_6)
+```
+
+```{r}
+#make children a dummy variable
+train$childdummy <- 0 
+train$childdummy[train$Children > 0] <- 1
+
+
+#Model 7
+model_7 <- lm(lnCharges ~., data = train[,c(10,2:4,6:9,18)] ) #pulling only columns I want
+summary(model_7)
+#this model uses lncharges and dummy children 
+```
+
+```{r,warning=FALSE}
+scatterplotMatrix(train[c(10,2:3,18)]) # grabbing lnCharges
+par(mfrow=c(1,2)) # Lipton Input to place the charts side by side
+```
+
+```{r}
+par(mfrow=c(2,2))
+plot(model_7)
+
 #
 ```
 
@@ -101,7 +254,25 @@ Implement the solutions from question 3, such as data transformation, along with
 Use the 30 withheld observations and calculate the performance measures for your best two models. Which is the better model? (remember that "better" depends on whether your outlook is short or long run)
 
 ```{r q5}
-#
+
+test$lnCharges <- log(test$Charges)
+test$childdummy <- 0 
+test$childdummy[test$Children > 0] <- 1
+
+
+test$insurance_model_pred <- predict(allvar, newdata = test)
+
+test$model_1_pred <- predict(model_1,newdata = test) %>% exp()
+
+test$model_7_pred <- predict(model_7,newdata = test) %>% exp()
+
+# Finding the error
+
+test$error_bm <- test$insurance_model_pred - test$Charges
+
+test$error_1 <- test$model_1_pred - test$Charges
+
+test$error_7 <- test$model_7_pred - test$Charges
 ```
 
 
