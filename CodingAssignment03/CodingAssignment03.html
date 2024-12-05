@@ -1519,6 +1519,7 @@ train &lt;- insurance[-exclude, ]
 test &lt;- insurance[exclude, ]
 
 train %&gt;%
+  select(Charges, Age, BMI, Children) %&gt;%
   tbl_summary(statistic = list(all_continuous() ~ c(&quot;{mean}&quot;,       # Mean
                                                     &quot;{sd}&quot;,         # Standard Deviation
                                                     &quot;{median}&quot;,     # Median
@@ -1968,8 +1969,6 @@ height: 0px !important;
 <td headers="stat_0" class="gt_row gt_center">16.0</td></tr>
     <tr><td headers="label" class="gt_row gt_left">    Max</td>
 <td headers="stat_0" class="gt_row gt_center">47.7</td></tr>
-    <tr><td headers="label" class="gt_row gt_left">Female</td>
-<td headers="stat_0" class="gt_row gt_center">28 (40%)</td></tr>
     <tr><td headers="label" class="gt_row gt_left">Children</td>
 <td headers="stat_0" class="gt_row gt_center"><br /></td></tr>
     <tr><td headers="label" class="gt_row gt_left">    0</td>
@@ -1984,14 +1983,6 @@ height: 0px !important;
 <td headers="stat_0" class="gt_row gt_center">2 (2.9%)</td></tr>
     <tr><td headers="label" class="gt_row gt_left">    5</td>
 <td headers="stat_0" class="gt_row gt_center">1 (1.4%)</td></tr>
-    <tr><td headers="label" class="gt_row gt_left">Smoker</td>
-<td headers="stat_0" class="gt_row gt_center">16 (23%)</td></tr>
-    <tr><td headers="label" class="gt_row gt_left">WinterSprings</td>
-<td headers="stat_0" class="gt_row gt_center">17 (24%)</td></tr>
-    <tr><td headers="label" class="gt_row gt_left">WinterPark</td>
-<td headers="stat_0" class="gt_row gt_center">23 (33%)</td></tr>
-    <tr><td headers="label" class="gt_row gt_left">Oviedo</td>
-<td headers="stat_0" class="gt_row gt_center">14 (20%)</td></tr>
   </tbody>
   
   <tfoot class="gt_footnotes">

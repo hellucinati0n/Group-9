@@ -49,6 +49,7 @@ train <- insurance[-exclude, ]
 test <- insurance[exclude, ]
 
 train %>%
+  select(Charges, Age, BMI, Children) %>%
   tbl_summary(statistic = list(all_continuous() ~ c("{mean}",       # Mean
                                                     "{sd}",         # Standard Deviation
                                                     "{median}",     # Median
