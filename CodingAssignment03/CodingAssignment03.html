@@ -1485,26 +1485,29 @@ border-radius: 0px;
 </div>
 
 
-<pre><code>
-A Florida health insurance company wants to predict annual claims for individual clients. The company pulls a random sample of 100 customers. The owner wishes to charge an actuarially fair premium to ensure a normal rate of return. The owner collects all of their current customer’s health care expenses from the last year and compares them with what is known about each customer’s plan. 
-
-The data on the 100 customers in the sample is as follows:
-
--   Charges: Total medical expenses for a particular insurance plan (in dollars)
--   Age: Age of the primary beneficiary
--   BMI: Primary beneficiary’s body mass index (kg/m2)
--   Female: Primary beneficiary’s birth sex (0 = Male, 1 = Female)
--   Children: Number of children covered by health insurance plan (includes other dependents as well)
--   Smoker: Indicator if primary beneficiary is a smoker (0 = non-smoker, 1 = smoker)
--   Cities: Dummy variables for each city with the default being Sanford
-
-Answer the following questions using complete sentences and attach all output, plots, etc. within this report.
-
-
-
-``` r
-# Bring in the dataset here.
-insurance &lt;- read.csv(&quot;../CodingAssignment03/Insurance_Data_Group9.csv&quot;)</code></pre>
+<p>A Florida health insurance company wants to predict annual claims for
+individual clients. The company pulls a random sample of 100 customers.
+The owner wishes to charge an actuarially fair premium to ensure a
+normal rate of return. The owner collects all of their current
+customer’s health care expenses from the last year and compares them
+with what is known about each customer’s plan.</p>
+<p>The data on the 100 customers in the sample is as follows:</p>
+<ul>
+<li>Charges: Total medical expenses for a particular insurance plan (in
+dollars)</li>
+<li>Age: Age of the primary beneficiary</li>
+<li>BMI: Primary beneficiary’s body mass index (kg/m2)</li>
+<li>Female: Primary beneficiary’s birth sex (0 = Male, 1 = Female)</li>
+<li>Children: Number of children covered by health insurance plan
+(includes other dependents as well)</li>
+<li>Smoker: Indicator if primary beneficiary is a smoker (0 =
+non-smoker, 1 = smoker)</li>
+<li>Cities: Dummy variables for each city with the default being
+Sanford</li>
+</ul>
+<p>Answer the following questions using complete sentences and attach
+all output, plots, etc. within this report.</p>
+<pre class="r"><code>insurance &lt;- read.csv(&quot;../CodingAssignment03/Insurance_Data_Group9.csv&quot;)</code></pre>
 <div id="question-1" class="section level2">
 <h2>Question 1</h2>
 <p>Randomly select 30 observations from the sample and exclude from all
@@ -1998,7 +2001,6 @@ height: 0px !important;
   </tfoot>
 </table>
 </div>
-<pre class="r"><code>#</code></pre>
 </div>
 <div id="question-2" class="section level2">
 <h2>Question 2</h2>
@@ -2009,7 +2011,6 @@ height: 0px !important;
 ## Age      0.2669529 1.0000000 0.2372201 0.2987257
 ## BMI      0.2394231 0.2372201 1.0000000 0.1781634
 ## Children 0.2497586 0.2987257 0.1781634 1.0000000</code></pre>
-<pre class="r"><code>#</code></pre>
 </div>
 <div id="question-3" class="section level2">
 <h2>Question 3</h2>

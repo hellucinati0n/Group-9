@@ -16,7 +16,6 @@ library(jtools)
 library(readxl)
 library(gtsummary)
 ```
-```
 
 A Florida health insurance company wants to predict annual claims for individual clients. The company pulls a random sample of 100 customers. The owner wishes to charge an actuarially fair premium to ensure a normal rate of return. The owner collects all of their current customer’s health care expenses from the last year and compares them with what is known about each customer’s plan. 
 
@@ -34,9 +33,7 @@ Answer the following questions using complete sentences and attach all output, p
 
 
 ```{r dataset}
-# Bring in the dataset here.
 insurance <- read.csv("../CodingAssignment03/Insurance_Data_Group9.csv")
-
 ```
 
 
@@ -61,7 +58,7 @@ train %>%
                                ),
     type = all_continuous() ~ "continuous2" # Enhanced formatting for continuous variables
   )
-#
+
 ```
 
 
@@ -71,8 +68,6 @@ Provide the correlation between all quantitative variables
 
 ```{r}
 cor(train[, c("Charges", "Age", "BMI", "Children")])
-
-#
 ```
 
 
@@ -80,13 +75,11 @@ cor(train[, c("Charges", "Age", "BMI", "Children")])
 
 Run a regression that includes all independent variables in the data table. Does the model above violate any of the Gauss-Markov assumptions? If so, what are they and what is the solution for correcting?
 
-```{r}
+```{r q3}
 allvar <- lm(Charges ~ Age + BMI + Female + Children + Smoker + WinterPark + WinterSprings + Oviedo, data = train)
 summary(allvar)
 plot(allvar)
-
 ```
-
 
 ## Question 4
 
