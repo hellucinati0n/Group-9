@@ -82,6 +82,22 @@ summary(allvar)
 plot(allvar)
 ```
 
+Yes, the plots above show some of the Gauss-Markov assumptions have been violated.
+
+The ‘Residuals versus Fitted’ graph shows that there is a non-linear relationship between the variables. This violates assumption 3 of the Gauss-Markov theorem, which states that independent variables are not correlated with error. This nonlinear relationship also show that there is specification bias.
+
+The second plot titled “Normal Q-Q” shows the assumption of a normally distributed dependent variable for a fixed set of predictors. The line shown is fairly a 45-degree line upwards, although there are some observations which fall above and below the line. This makes it non-linear, which violates 6th assumption of the Gauss-Markov assumptions.
+
+Finally, the third plot titled “Scale-Location” checks for homoskedasticity, which is shown on this graph and violates assumption 4 of the Gauss-Markov theorem because the data spreads apart as time increases.If this assumption were not violated, you’d see random points around a horizontal line. In this case, the line is not horizontal and the results tend to trend downward sloping, with a slight “fanning out” effect.
+
+The last plot “Residuals vs. Leverage” keeps an eye out for regression outliers, influential observations, and high leverage points. There currently aren’t any outliers which fall outside Cook’s distance.
+
+These should be solutions for the Gauss Markov violations:
+
+For non-linearity, you can transform certain independent or dependent variables by using log transformations, or square root transformations. Due to the spread of data for insurance charges, taking the logarithmic function of Charges will allow us to evaluate the data by making it linear as well as stabilize variance for Heteroscedasticity.
+
+You also could modify the model to include dummy variables that allow for different intercepts for each group, it could offer a more accurate representation of the data and alleviate the issues caused by heteroscedasticity.Most insurance do not count the number of children in a family, there are typically two types of insurance options, ‘single’ and ‘family’. So transforming the variable of Children from a quantitative to a dummy variable helps to better categorize the variable and evaluate the data.
+
 ## Question 4
 
 Implement the solutions from question 3, such as data transformation, along with any other changes you wish. Use the sample data and run a new regression. How have the fit measures changed? How have the signs and significance of the coefficients changed?
