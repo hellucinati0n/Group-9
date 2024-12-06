@@ -11,9 +11,8 @@ output:
 ```{r setup, include=FALSE}
 #Put any packages you need here
 knitr::opts_chunk$set(echo = TRUE)
-library(dplyr)
-library(jtools)
-library(gtsummary)
+library(dplyr) #for grammar of data manipulation
+library(jtools) #for analysis and presentation of data
 library(car) # for vif function
 library(plotly) # for interactive visualizations
 library(gt) # for better looking tables
@@ -37,6 +36,7 @@ Answer the following questions using complete sentences and attach all output, p
 
 ```{r dataset}
 insurance <- read.csv("../CodingAssignment03/Insurance_Data_Group9.csv")
+gt(head(tractor)) # the gt function only makes it look nicer
 ```
 
 
@@ -48,8 +48,8 @@ Randomly select 30 observations from the sample and exclude from all modeling. P
 ```{r q1}
 set.seed(123457)
 exclude <- sample(nrow(insurance), 30)
-train <- insurance[-exclude, ]
-test <- insurance[exclude, ]
+train <- insurance[-exclude,]
+test <- insurance[exclude,]
 
 train %>%
   select(Charges, Age, BMI, Children) %>%
@@ -105,82 +105,89 @@ You also could modify the model to include dummy variables that allow for differ
 
 Implement the solutions from question 3, such as data transformation, along with any other changes you wish. Use the sample data and run a new regression. How have the fit measures changed? How have the signs and significance of the coefficients changed?
 
-As shown in the graphs below, charges and children do not show a linear regression because the histograms are not normally distributed. Therefore, we need to train the logarithmic and quadratic models with a sample size of 10 on the variables charges and children before we can confirm that the regression fits a quadratic or logarithmic model. Since we can only plot quantitative variables in scatter-plot and histogram, we will exclude the categorical variables.
-
 ```{r q4}
 par(mfrow=c(1,2))
 hist(insurance$Children) #before
-
-set.seed(123457)
-index <- sample(seq_len(nrow(insurance)), size = 10)
-train <- insurance[-index,]
-test <- insurance[index,]
-summary(train)
 scatterplotMatrix(train[-c(4,6:9)])
+summary(train)
 ```
+Below, we will take both the log and quadratic forms of each variable to determine best fit relative to the linear form, which was found to be problematic.
 
-Data Transformation:
-Transform Charges into the log function to get the points closer to each other. After transforming charges into the log function, it is shown on the histogram below that the log of charges has a normal distribution. Therefore, log of charges is a better representation of this variable.
+Taking logs will bring outliers closer to other charges. After transforming charges into the log function, the histograms below show that the adapted version brings charges closer to a normal distribution. Therefore, log of charges creates a better model.
 
-```{r q4}
+```{r}
 hist(train$Charges) #before
 train$lnCharges <- log(train$Charges) 
 hist(train$lnCharges) #after
+summary(train$lnCharges)
+
+# raw charges vs log charges
+```
+```{r q4}
 
 hist(train$Charges) #before
 train$ChargesSquared <- train$Charges^2 
 hist(train$ChargesSquared) #after
+summary(train$ChargesSquared)
+
+# raw charges vs quadratic charges
 ```
 ```{r}
-scatterplotMatrix(train[c(10,2:3,5)]) # grabbing lnCharges
+scatterplotMatrix(train[c(10,2:3,5)]) # lnCharges
 par(mfrow=c(1,2)) # Charges side by side
 
-
 ```
+
 ```{r}
-train$ChildrenSquared <- train$Children^2
+train$ChildrenSquared <- train$Children^2 # quadratic of children
 hist(train$ChildrenSquared) #after
+summary(train$ChildrenSquared)
 
-train$lnChildren <- log(train$Children) 
+train$lnChildren <- log(train$Children) #log of children
 hist(train$lnChildren) #after
+summary(train$lnChildren)
 
-scatterplotMatrix(train[c(10,2:3,12)]) # grabbing lnCharges with lnChildren
-par(mfrow=c(1,2)) #  Input to place the charts side by side
+scatterplotMatrix(train[c(10,2:3,12)]) # lnCharges with lnChildren
+par(mfrow=c(1,2)) # Charts side by side
 
 ```
+
 ```{r}
 hist(train$Age) #before
-train$AgeSquared <- train$Age^2 
+train$AgeSquared <- train$Age^2 # quadratic of age
 hist(train$AgeSquared) #after
+summary(train$AgeSquared)
 ```
 
 ```{r}
 hist(train$Age) #before
-train$lnAge <- log(train$Age) 
+train$lnAge <- log(train$Age) # log of age
 hist(train$lnAge) #after
+summary(train$lnAge)
 ```
 
 ```{r}
 hist(train$BMI) #before
-train$BMISquared <- train$BMI^2 
+train$BMISquared <- train$BMI^2 # quadratic of BMI
 hist(train$BMISquared) #after
+summary(train$BMISquared)
 ```
 
 ```{r}
 hist(train$BMI) #before
 train$lnBMI <- log(train$BMI) 
 hist(train$lnBMI) #after
+summary(train$lnBMI)
 ```
 
+Transforming the "Children" variable does not give us a normal distribution and therefore yields bias and inefficiency for the aforementioned log and quadratic forms.
 
 
-Transforming the Children variable into the log and quadratic form does not change the variable in to a normal distribution. Therefore, the Children variable does not fit the log and quadratic form.
 
 ```{r}
 #Model 1
-model_1 <- lm(lnCharges ~., data = train[,c(10,2:9)] ) #pulling specific columns
+model_1 <- lm(lnCharges ~., data = train[,c(10,2:9)] ) #pulling specific columns for log of charges
 summary(model_1)
-#this model only change is log of charges, all independent variables remain the same.
 
 ```
 ```{r}
@@ -189,9 +196,9 @@ plot(model_1)
 ```
 ```{r}
 #Model 2
-model_2 <- lm(lnCharges ~., data = train[,c(10,3:9,15)] ) #pulling specific columns
+model_2 <- lm(lnCharges ~., data = train[,c(10,3:9,15)] ) #pulling specific columns for lnCharges and lnAge
 summary(model_2)
-#this model uses lncharges and lnAge
+
 ```
 ```{r}
 par(mfrow=c(2,2))
@@ -199,9 +206,9 @@ plot(model_2)
 ```
 ```{r}
 #Model 3
-model_3 <- lm(lnCharges ~., data = train[,c(10,14,3:9)] ) #pulling specific columns
+model_3 <- lm(lnCharges ~., data = train[,c(10,14,3:9)] ) #pulling specific columns for lnCharges and quadratic Age
 summary(model_3)
-#this model uses lncharges and AgeSquared
+
 ```
 ```{r}
 par(mfrow=c(2,2))
@@ -209,9 +216,9 @@ plot(model_3)
 ```
 ```{r}
 #Model 4
-model_4 <- lm(lnCharges ~., data = train[,c(10,2,4:9,17)] ) #pulling specific columns
+model_4 <- lm(lnCharges ~., data = train[,c(10,2,4:9,17)] ) #pulling specific columns for lnCharges and lnBMI
 summary(model_4)
-#this model uses lncharges and lnBMI
+
 ```
 ```{r}
 par(mfrow=c(2,2))
@@ -219,9 +226,9 @@ plot(model_4)
 ```
 ```{r}
 #Model 5
-model_5 <- lm(lnCharges ~., data = train[,c(10,2,4:9,16)] ) #pulling specific columns
+model_5 <- lm(lnCharges ~., data = train[,c(10,2,4:9,16)] ) #pulling specific columns for lnCharges and quadratic BMI
 summary(model_5)
-#this model uses lncharges and BMISquared
+
 ```
 ```{r}
 par(mfrow=c(2,2))
@@ -229,9 +236,9 @@ plot(model_5)
 ```
 ```{r}
 #Model 6
-model_6 <- lm(lnCharges ~., data = train[,c(10,2:4,6:9,12,5)] ) #pulling specific columns
+model_6 <- lm(lnCharges ~., data = train[,c(10,2:4,6:9,12,5)] ) #pulling specific columns for lnCharges and quadratic Children
 summary(model_6)
-#this model uses lncharges and ChildrenSquared
+
 ```
 ```{r}
 par(mfrow=c(2,2))
@@ -243,9 +250,9 @@ train$childdummy <- 0
 train$childdummy[train$Children > 0] <- 1
 
 #Model 7
-model_7 <- lm(lnCharges ~., data = train[,c(10,2:4,6:9,18)] ) #pulling specific columns
+model_7 <- lm(lnCharges ~., data = train[,c(10,2:4,6:9,18)] ) #pulling specific columns for lnCharges, using children as a dummy variable
 summary(model_7)
-#this model uses lncharges and dummy children 
+
 ```
 ```{r,warning=FALSE}
 scatterplotMatrix(train[c(10,2:3,18)]) # pulling lnCharges
