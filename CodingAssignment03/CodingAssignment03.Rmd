@@ -46,10 +46,11 @@ gt(head(tractor)) # the gt function only makes it look nicer
 Randomly select 30 observations from the sample and exclude from all modeling. Provide the summary statistics (min, max, std, mean, median) of the quantitative variables for the 70 observations.
 
 ```{r q1}
+
 set.seed(123457)
 exclude <- sample(nrow(insurance), 30)
-train <- insurance[-exclude,]
-test <- insurance[exclude,]
+train <- insurance[-exclude,] # data for 30 excluded observations
+test <- insurance[exclude,] # data for 70 included observations
 
 train %>%
   select(Charges, Age, BMI, Children) %>%
@@ -237,6 +238,7 @@ plot(model_5)
 ```{r}
 #Model 6
 model_6 <- lm(lnCharges ~., data = train[,c(10,2:4,6:9,12,5)] ) #pulling specific columns for lnCharges and quadratic Children
+
 summary(model_6)
 
 ```
@@ -254,6 +256,7 @@ model_7 <- lm(lnCharges ~., data = train[,c(10,2:4,6:9,18)] ) #pulling specific 
 summary(model_7)
 
 ```
+
 ```{r,warning=FALSE}
 scatterplotMatrix(train[c(10,2:3,18)]) # pulling lnCharges
 par(mfrow=c(1,2))
@@ -269,25 +272,103 @@ plot(model_7)
 Use the 30 withheld observations and calculate the performance measures for your best two models. Which is the better model? (remember that "better" depends on whether your outlook is short or long run)
 
 ```{r q5}
+
+bad_model <- lm(Charges ~., data = insurance)
+summary(bad_model)
+
 test$lnCharges <- log(test$Charges)
-test$childdummy <- 0 
-test$childdummy[test$Children > 0] <- 1
+test$ChildrenSquared <- test$Children^2
+test$lnAge <- log(test$Age)
+```
 
+```{r}
+test$bad_model_pred <- predict(bad_model, newdata = test)
 
-test$insurance_model_pred <- predict(insurance_model, newdata = test)
+test$model_2_pred <- predict(model_2,newdata = test) %>% exp()
 
-test$model_1_pred <- predict(model_1,newdata = test) %>% exp()
-
-test$model_7_pred <- predict(model_7,newdata = test) %>% exp()
+test$model_6_pred <- predict(model_6,newdata = test) %>% exp()
 
 # Finding the error
 
-test$error_bm <- test$insurance_model_pred - test$Charges
+test$error_bm <- test$bad_model_pred - test$Charges
 
-test$error_1 <- test$model_1_pred - test$Charges
+test$error_2 <- test$model_2_pred - test$Charges
 
-test$error_7 <- test$model_7_pred - test$Charges
+test$error_6 <- test$model_6_pred - test$Charges
 ```
+
+### Bias
+
+```{r}
+# Bad Model
+mean(test$error_bm)
+
+# Model 1
+mean(test$error_2)
+
+# Model 2
+mean(test$error_6)
+```
+
+### MAE
+
+
+```{r}
+# I decided to create a function to calculate this
+
+mae <- function(error_vector){
+  error_vector %>% 
+  abs() %>% 
+  mean()
+}
+
+# Bad Model
+mae(test$error_bm)
+
+# Model 1
+mae(test$error_2)
+
+# Model 2
+mae(test$error_6)
+
+```
+
+### RMSE
+
+```{r}
+rmse <- function(error_vector){
+   error_vector^2 %>% 
+  mean() %>% 
+  sqrt()
+
+}
+
+# Bad Model
+rmse(test$error_bm)
+# Model 1
+rmse(test$error_2)
+
+# Model 2
+rmse(test$error_6)
+```
+
+### MAPE
+
+```{r}
+mape <- function(error_vector, actual_vector){
+  (error_vector/actual_vector) %>% 
+    abs() %>% 
+    mean()
+}
+
+# Bad Model
+mape(test$error_bm, test$saleprice)
+
+# Model 1
+mape(test$error_2, test$saleprice)
+
+# Model 2
+mape(test$error_6, test$saleprice)
 ```
 
 
