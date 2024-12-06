@@ -144,7 +144,15 @@ An eager insurance representative comes back with five potential clients. Using 
 
 The owner notices that some of the predictions are wider than others, explain why.
 
+The prediction and confidence outputs reveal that the prediction interval has wider boundaries than the confidence interval, which is expected. This difference arises because the prediction interval accounts for both the uncertainty in estimating the population mean and the random variation of individual values.
+
+In this case, some prediction intervals are wider than others due to the use of independent variable values that are significantly larger or smaller than average, placing them closer to the bounds of the range. For instance, comparing the prediction intervals for row 1 (which uses the largest age and lowest BMI) and row 3 (which uses the same values for age and BMI) highlights this variation. Row 1 has a wider prediction interval of 10.01 - 8.11 = 1.90, while row 3 has a slightly narrower prediction interval of 10.44 - 8.62 = 1.82. This difference illustrates how the input data can influence the width of the prediction intervals.
+
+
 ## Question 9 
 
 Are there any prediction problems that occur with the five potential clients? If so, explain.
 
+Prediction problems often involve several types of errors, including extrapolation, model bias, high variance, and the effects of non-linearity and interactions. In this context, extrapolation error is unlikely to be a concern since the range of values for each independent variable in Model 7’s training data set adequately covers the range needed for the five clients in terms of age, BMI, number of children, and other factors. However, the model exhibits a negative bias, suggesting that predictions are likely to underestimate actual values.
+
+Another critical consideration is the sample size. Model 7’s training dataset includes only 30 observations, which is relatively small. A larger sample size, such as 100 or more, would provide a more accurate representation and improve the model’s reliability. Additionally, when using a model with a log-transformed dependent variable like lncharges, it is crucial to back-transform the results to reflect the true dollar amounts for accurate interpretation.
