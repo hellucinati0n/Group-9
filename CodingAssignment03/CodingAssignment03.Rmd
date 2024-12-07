@@ -106,22 +106,26 @@ You also could modify the model to include dummy variables that allow for differ
 
 Implement the solutions from question 3, such as data transformation, along with any other changes you wish. Use the sample data and run a new regression. How have the fit measures changed? How have the signs and significance of the coefficients changed?
 
+### Data Tranformation
+
 ```{r q4}
-hist(train$Charges) #before
 train$lnCharges <- log(train$Charges) 
 hist(train$lnCharges) #after for log Charges
+summary(train$lnCharges)
 
 hist(train$Charges) #before
 train$ChargesSquared <- train$Charges^2 # charges squared
 hist(train$ChargesSquared) #after
+summary(train$ChargesSquared)
 
 scatterplotMatrix(train[c(10,2:3,5)]) # lnCharges
 par(mfrow=c(1,2)) # Charges side by side
 ```
+As seen through the histograms above, taking the log of charges will bring outliers closer to other charges. Using charges without transforming the data results in data that is skewed left, and transforming using the quadratic form of charges results in data that is drastically skewed left. Including the transformation for charges squared illustrates the inappropriate nature of squaring the dependent variable in these cases. After transforming charges into the log function, the histogram above shows that the log version brings charges closer to a normal distribution.
 
-As seen above, taking logs will bring outliers closer to other charges. After transforming charges into the log function, the histograms above show that the log version brings charges closer to a normal distribution.
+### Data Transformation Continued
 
-Below, we will take both the log and quadratic forms of multiple variables to determine better fits relative to the linear form, which was found to be problematic.
+Below, we will take both the log and quadratic forms of multiple independent variables to determine better fits relative to the original linear form, which was found to be problematic.
 
 
 ```{r}
@@ -161,7 +165,9 @@ train$BMISquared <- train$BMI^2 # quadratic of BMI
 hist(train$BMISquared)  #after
 summary(train$BMISquared)
 ```
+### Modeling
 
+Based on the transformation above, we will create models that reflect both quadratic and linear forms for multiple independent variables.
 
 
 ```{r}
@@ -174,8 +180,6 @@ plot(model_1)
 
 #ln charges
 ```
-
-
 
 ```{r}
 #Model 2
@@ -222,7 +226,6 @@ par(mfrow=c(2,2))
 plot(model_5)
 
 #lnCharges and lnBMI
-
 ```
 
 ```{r}
@@ -238,30 +241,32 @@ plot(model_6)
 ```
 
 ```{r}
+#Model 7
+
 #make children a dummy variable
 train$childdummy <- 0 
 train$childdummy[train$Children > 0] <- 1
-```
 
-```{r}
-#Model 7
 model_7 <- lm(lnCharges ~., data = train[,c(10,2:4,6:9,18)] ) #pulling only columns I want
 summary(model_7)
 
+par(mfrow=c(2,2))
+plot(model_7)
+
 #dummy variable children
-
-```
-
-```{r,warning=FALSE}
-scatterplotMatrix(train[c(10,2:3,18)]) # pulling lnCharges
-par(mfrow=c(1,2))
 ```
 
 ```{r}
-par(mfrow=c(2,2))
-plot(model_7)
-```
+#Model 8
+model_8 <- lm(lnCharges ~., data = train[,c(10,2:9,15)] ) #pulling only columns I want
 
+summary(model_8)
+
+par(mfrow=c(2,2))
+plot(model_2)
+
+#lnCharges and Age + AgeSquared
+```
 
 ## Question 5
 
