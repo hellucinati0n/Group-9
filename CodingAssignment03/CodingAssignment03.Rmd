@@ -404,6 +404,23 @@ An eager insurance representative comes back with five potential clients. Using 
 
 ```{r q7}
 #
+name <- c("Customer", "Age", "BMI","Female","Children","Smoker","City")
+Customer <- c("1","2","3","4","5")
+Age <- c(60,40,25,33,45)
+BMI <- c(22,30,25,35,27)
+Female <- c(1,0,0,1,1)
+childdummy <- c(0,1,0,2,3)
+Smoker <- c(0,0,1,0,0)
+WinterSprings <- c(0,0,0,1,0)
+WinterPark <- c(0,0,1,0,0)
+Oviedo <- c(1,0,0,0,1)
+Sanford <- c(0,0,0,0,0)
+
+#
+Potential_Clients <-data.frame(Customer,Age,BMI,Female,childdummy,Smoker,WinterSprings,WinterPark,Oviedo,Sanford)
+
+#
+predict(model_7, newdata = Potential_Clients,interval = "prediction")
 ```
 
 ## Question 8
