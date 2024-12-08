@@ -389,11 +389,6 @@ Provide interpretations of the coefficients, do the signs make sense? Perform ma
 
 -For the variable Age, each additional year adds an expected $251.26 in medical expenses, For every increase in 1 in BMI score, there is an expected increase of $394.14 in medical expenses. If the customer is a Female, there is an expected $718.53 decrease in medical expenses in comparison to a male. If the customer is a child, there is an expected $1075.41 increase in medical expenses in comparison to a non-child. If the customer is a smoker, there is an expected increase of $24707.50 in medical expenses compared to a non-smoker. If the location of the customer is in Winter Springs, there is an expected lower medical expense of $338.49 in comparison to the default location of Sanford. If the location of the customer is Winter Park, there is an expected lower medical expense of $3937.16 in comparison to the default of Sanford. If the location of the customer is Oviedo, there is an expected lower medical expense of $796.89 in comparison to the default of Sanford.
 
-
-```{r q6}
-
-```
-
 ## Question 7
 
 An eager insurance representative comes back with five potential clients. Using the better of the two models selected above, provide the prediction intervals for the five potential clients using the information provided by the insurance rep.
@@ -432,15 +427,15 @@ predict(model_7, newdata = Potential_Clients,interval = "prediction")
 
 The owner notices that some of the predictions are wider than others, explain why.
 
-The prediction and confidence outputs reveal that the prediction interval has wider boundaries than the confidence interval, which is expected. This difference arises because the prediction interval accounts for both the uncertainty in estimating the population mean and the random variation of individual values.
+-The prediction and confidence outputs reveal that the prediction interval has wider boundaries than the confidence interval, which is expected. This difference arises because the prediction interval accounts for both the uncertainty in estimating the population mean and the random variation of individual values.
 
-In this case, some prediction intervals are wider than others due to the use of independent variable values that are significantly larger or smaller than average, placing them closer to the bounds of the range. For instance, comparing the prediction intervals for row 1 (which uses the largest age and lowest BMI) and row 3 (which uses the same values for age and BMI) highlights this variation. Row 1 has a wider prediction interval of 10.01 - 8.11 = 1.90, while row 3 has a slightly narrower prediction interval of 10.44 - 8.62 = 1.82. This difference illustrates how the input data can influence the width of the prediction intervals.
+-In this case, some prediction intervals are wider than others due to the use of independent variable values that are significantly larger or smaller than average, placing them closer to the bounds of the range. For instance, comparing the prediction intervals for row 1 (which uses the largest age and lowest BMI) and row 3 (which uses the same values for age and BMI) highlights this variation. Row 1 has a wider prediction interval of 10.01 - 8.11 = 1.90, while row 3 has a slightly narrower prediction interval of 10.44 - 8.62 = 1.82. This difference illustrates how the input data can influence the width of the prediction intervals.
 
 
 ## Question 9 
 
 Are there any prediction problems that occur with the five potential clients? If so, explain.
 
-Prediction problems often involve several types of errors, including extrapolation, model bias, high variance, and the effects of non-linearity and interactions. In this context, extrapolation error is unlikely to be a concern since the range of values for each independent variable in Model 7’s training data set adequately covers the range needed for the five clients in terms of age, BMI, number of children, and other factors. However, the model exhibits a negative bias, suggesting that predictions are likely to underestimate actual values.
+-Prediction problems often involve several types of errors, including extrapolation, model bias, high variance, and the effects of non-linearity and interactions. In this context, extrapolation error is unlikely to be a concern since the range of values for each independent variable in Model 7’s training data set adequately covers the range needed for the five clients in terms of age, BMI, number of children, and other factors. However, the model exhibits a negative bias, suggesting that predictions are likely to underestimate actual values.
 
-Another critical consideration is the sample size. Model 7’s training dataset includes only 30 observations, which is relatively small. A larger sample size, such as 100 or more, would provide a more accurate representation and improve the model’s reliability. Additionally, when using a model with a log-transformed dependent variable like lncharges, it is crucial to back-transform the results to reflect the true dollar amounts for accurate interpretation.
+-Another critical consideration is the sample size. Model 7’s training dataset includes only 30 observations, which is relatively small. A larger sample size, such as 100 or more, would provide a more accurate representation and improve the model’s reliability. Additionally, when using a model with a log-transformed dependent variable like lncharges, it is crucial to back-transform the results to reflect the true dollar amounts for accurate interpretation.
